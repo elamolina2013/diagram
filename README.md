@@ -1,12 +1,13 @@
 # diagram
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     
     actor Dev as Usuario Solicitante 
     actor PO as Product Owner (PO)
-    actor Par as Revisor Par 
+    actor Revisor as Revisor Par 
     participant Teams as Canal Teams
     participant Bot as Azure Bot Service
     participant Backend as Bot Backend
@@ -79,14 +80,14 @@ sequenceDiagram
         TFC-->>MCP: Retorna Plan + Sentinel Status + Costos
         MCP-->>Agent: JSON estructurado
         
-        %% Fase 5: Revisión del Solicitante y Par
+        %% Fase 5: Revisión del Solicitante y Revisor
         Agent->>Backend: Envía detalles del Plan
         Backend->>Teams: Muestra Tarjeta Adaptativa (Plan)
         Teams-->>Dev: Decide si aplica el cambio
         Dev->>Teams: Aprueba el plan (intención)
         
-        Dev->>Par: Solicita revisión de código (Peer Review)
-        Par-->>Dev: Revisión OK
+        Dev->>Revisor: Solicita revisión de código (Peer Review)
+        Revisor-->>Dev: Revisión OK
         
         %% Fase 6: Políticas Sentinel y Costos
         alt Políticas Sentinel Falla / Con Observaciones
