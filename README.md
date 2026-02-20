@@ -54,6 +54,26 @@ sequenceDiagram
     end
 ```
 
+Fase,Responsable Principal,Descripción Key
+1. Identificación,AI Agent + AAD/CVT,Validación de que el usuario tiene permisos sobre la App impactada.
+2. Diseño,AI Agent + TFC Registry,Selección de módulos privados y generación de código HCL.
+3. Análisis,Terraform Cloud,"Ejecución de Speculative Plans, validación de políticas y estimación de costos."
+4. Gobernanza,PO + Revisor Par,Validación humana del impacto técnico y financiero antes del despliegue.
+5. Ejecución,AI Agent + MCP Tool,Aplicación de cambios (apply) y cierre de tickets en Jira.
+
+
+🔍 Detalle Técnico de Interacciones
+Selecciona una fase para ver el diagrama de secuencia detallado con todas las llamadas a herramientas MCP y validaciones específicas:
+
+[!TIP]
+Los diagramas detallados a continuación contienen las notas técnicas de implementación para el equipo de ingeniería.
+
+<details>
+<summary><b>📂 Ver Detalles Técnicos (Fases 1 a 8)</b></summary>
+
+(Aquí puedes pegar los bloques de código detallados que generamos anteriormente)
+
+</details>
 
 <details>
 <summary><b>Fase 1: Validación de Identidad y Autorización</b></summary>
