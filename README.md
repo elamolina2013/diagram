@@ -221,6 +221,7 @@ sequenceDiagram
     participant MCP as MCP Server (Tools)
     participant GH as GitHub
     participant TFC as Terraform Cloud
+    participant FinOps as FinOps Tool (Azure/Cloudability)
 
     %% Fase 4: GitOps y Comportamiento Natural de TFC
     rect rgba(0, 120, 215, 0.1)
@@ -237,8 +238,13 @@ sequenceDiagram
         Agent->>MCP: Tool: Interprete (Consultar TFC)
         MCP->>TFC: Obtiene JSON de Plan y Sentinel
         MCP->>MCP: Función 'Interprete': Traduce Plan a Lenguaje Natural
-        Agent->>MCP: Tool: FinOps (Calculadora/Azure)
-        MCP-->>Agent: Datos de Costos Enriquecidos
+
+        Note over Agent, FinOps: Consulta de Costos vía Tool Independiente
+        Agent->>MCP: Tool: Get Real Costs
+        MCP->>FinOps: POST /calculate (Payload del Plan)
+        FinOps-->>MCP: Retorna Estimación (Precios / Descuentos)
+        MCP-->>Agent: Datos de Costos Enriquecidos        
+        Agent->>Agent: Consolida Plan + Sentinel + Costos Reales  
     end
 ```
 
