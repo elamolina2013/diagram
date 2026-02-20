@@ -93,7 +93,7 @@ El ecosistema se divide entre servicios de plataforma y los componentes core des
 ---
 
 
-## 🔍 Detalle Técnico de Interacciones
+## 🔍 Detalle Técnico de Interacciones (Diagramas de Secuencia)
 Selecciona una fase para ver el diagrama de secuencia detallado con todas las llamadas a herramientas MCP y validaciones específicas:
 
 > [!TIP]
