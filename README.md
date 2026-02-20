@@ -7,7 +7,7 @@ Este documento detalla el ciclo de vida de una solicitud de aprovisionamiento, d
 ---
 
 ## 📍 Flujo Maestro (Nivel 0)
-Este diagrama representa la "Hoja de Ruta" del proceso. Proporciona una visión ejecutiva de las 5 fases principales del servicio.
+Este diagrama representa la "Hoja de Ruta" del proceso. Proporciona una visión macro de las 5 fases principales del servicio.
 
 ```mermaid
 sequenceDiagram
