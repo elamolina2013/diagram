@@ -89,16 +89,13 @@ El ecosistema se divide entre servicios de plataforma y los componentes core des
 | **Terraform Cloud** | Engine de Infraestructura | Registro de módulos privados, ejecución de planes, Sentinel (Governance) y FinOps. |
 | **GitHub** | Repositorio GitOps | Almacena el código generado y gestiona el ciclo de vida de los cambios mediante Pull Requests. |
 | **Jira / AAD / CVT** | Sistemas de Registro | Fuentes de verdad para trazabilidad (Jira), Identidad (AAD) e inventario de Apps (CVT). |
+| **FinOps Tool (Azure/Cloudability)** | Calculadora de Costos | Herramienta externa que calcula el impacto financiero real basado en el Plan de Terraform, aplicando precios específicos del contrato  y descuentos. |
 
 ---
 
 
 ## 🔍 Detalle Técnico de Interacciones (Diagramas de Secuencia)
-Selecciona una fase para ver el diagrama de secuencia detallado con todas las llamadas a herramientas MCP y validaciones específicas:
-
-> [!TIP]
-> Los diagramas detallados a continuación contienen las notas técnicas de implementación para el equipo de ingeniería.
-
+Selecciona una fase para ver el diagrama de secuencia detallado con todas las llamadas a herramientas  y validaciones específicas:
 
 <details>
 <summary><b>Fase 1: Validación de Identidad y Autorización</b></summary>
