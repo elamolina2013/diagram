@@ -245,7 +245,7 @@ sequenceDiagram
 </details>
 
 <details>
-<summary><b>Fase 4: Gobernanza, Apply y Cierre</b></summary>
+<summary><b>Fase 4: Gobernanza y aprobaciones</b></summary>
 
 ```mermaid
 sequenceDiagram
