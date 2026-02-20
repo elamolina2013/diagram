@@ -29,6 +29,7 @@ sequenceDiagram
     rect rgba(255, 255, 0, 0.1)
         Note over Dev, Aprobador: FASE 2: DISEÑO Y ORQUESTACIÓN
         Bot->>Dev: Conversación de Requisitos
+        Bot->>Gov: Crea Work Order (Trazabilidad)
         Bot->>GitOps: Genera Código y Abre Pull Request (PR)
     end
 
