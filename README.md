@@ -153,7 +153,8 @@ sequenceDiagram
 
 <details>
 <summary><b>Fase 4: Gobernanza y Aprovisionamiento Final</b></summary>
-``` mermaid
+    
+```mermaid
 sequenceDiagram
     autonumber
     
