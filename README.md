@@ -257,10 +257,6 @@ sequenceDiagram
     participant Teams as Canal Teams
     participant Backend as Bot Backend
     participant Agent as AI Foundry Agent
-    participant MCP as MCP Server (Tools)
-    participant GH as GitHub
-    participant TFC as Terraform Cloud
-    participant Jira as JIRA ITSM
 
     %% Fase 6: Lógica de Sentinel y Decisión del Usuario
     alt Sentinel Fallo HARD
@@ -289,41 +285,59 @@ sequenceDiagram
             PO->>Teams: Da conformidad
             Teams->>Agent: Enruta aprobación
         end
+    end
+```
+</details>
 
-        %% Fase 8: Merge y Ejecución de Apply
-        Agent->>MCP: Tool: Merge PR
-        MCP->>GH: Merge PR a rama destino
-        Note over GH, TFC: Comportamiento Natural: Gatilla RUN Final
-        GH-->>TFC: Gatilla Run (Plan/Sentinel OK)
-        Note right of TFC: TFC en espera de 'Apply' manual
-        
-        Agent->>MCP: Tool: Terraform Apply (API Call)
-        MCP->>TFC: POST /runs/:id/actions/apply
-        Agent->>Backend: Notifica "Ejecutando aprovisionamiento... esto tomará unos minutos"
-        Teams-->>Dev: "Aplicando cambios en la nube..."
+<details>
+<summary><b>Fase 5: Ejecución  y Cierre</b></summary>
 
-        alt Apply Exitoso
-            rect rgba(0, 255, 0, 0.1)
-                TFC-->>MCP: Apply Finished (Outputs)
-                Agent->>Backend: Notifica éxito + Detalle recursos (Name, RG, Subscription)
-                Agent->>Backend: Sugiere features adicionales del módulo
-                Teams-->>Dev: "Recursos creados con éxito. Puedes habilitar X feature luego."
-                Agent->>MCP: Cierra Work Order en JIRA
-                MCP->>Jira: WO Cerrado con trazabilidad total
-                MCP-->>Agent: Confirmación
-                Agent->>Backend: Genera mensaje de éxito
-                Backend->>Teams: Notifica éxito
-                Teams-->>Dev: "Aprovisionamiento terminado con éxito"
-                Note right of Teams: Mostrar Detalle de los cambios aplicados.
-            end
-        else Error en el Apply
-            rect rgba(255, 0, 0, 0.1)
-                TFC-->>MCP: Error en ejecución
-                Agent->>Backend: Notifica error al usuario
-                Agent->>MCP: Deriva WO a Soporte N2 (Expert Team)
-                MCP->>Jira: WO escalado a Soporte Cloud Governance
-                Teams-->>Dev: "Error en el apply. Se ha derivado tu caso a N2."
-            end
+```mermaid
+sequenceDiagram
+    autonumber
+    
+    actor Dev as Usuario Solicitante 
+    participant Teams as Canal Teams
+    participant Backend as Bot Backend
+    participant Agent as AI Foundry Agent
+    participant MCP as MCP Server (Tools)
+    participant GH as GitHub
+    participant TFC as Terraform Cloud
+    participant Jira as JIRA ITSM
+
+    %% Fase 8: Merge y Ejecución de Apply
+    Agent->>MCP: Tool: Merge PR
+    MCP->>GH: Merge PR a rama destino
+    Note over GH, TFC: Comportamiento Natural: Gatilla RUN Final
+    GH-->>TFC: Gatilla Run (Plan/Sentinel OK)
+    Note right of TFC: TFC en espera de 'Apply' manual
+    
+    Agent->>MCP: Tool: Terraform Apply (API Call)
+    MCP->>TFC: POST /runs/:id/actions/apply
+    Agent->>Backend: Notifica "Ejecutando aprovisionamiento... esto tomará unos minutos"
+    Teams-->>Dev: "Aplicando cambios en la nube..."
+
+    alt Apply Exitoso
+        rect rgba(0, 255, 0, 0.1)
+            TFC-->>MCP: Apply Finished (Outputs)
+            Agent->>Backend: Notifica éxito + Detalle recursos (Name, RG, Subscription)
+            Agent->>Backend: Sugiere features adicionales del módulo
+            Teams-->>Dev: "Recursos creados con éxito. Puedes habilitar X feature luego."
+            Agent->>MCP: Cierra Work Order en JIRA
+            MCP->>Jira: WO Cerrado con trazabilidad total
+            MCP-->>Agent: Confirmación
+            Agent->>Backend: Genera mensaje de éxito
+            Backend->>Teams: Notifica éxito
+            Teams-->>Dev: "Aprovisionamiento terminado con éxito"
+            Note right of Teams: Mostrar Detalle de los cambios aplicados.
+        end
+    else Error en el Apply
+        rect rgba(255, 0, 0, 0.1)
+            TFC-->>MCP: Error en ejecución
+            Agent->>Backend: Notifica error al usuario
+            Agent->>MCP: Deriva WO a Soporte N2 (Expert Team)
+            MCP->>Jira: WO escalado a Soporte Cloud Governance
+            Teams-->>Dev: "Error en el apply. Se ha derivado tu caso a N2."
         end
     end
 ```
