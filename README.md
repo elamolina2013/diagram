@@ -65,6 +65,15 @@ sequenceDiagram
 
 ---
 
+## 👥 Diagrama de Caso de Uso
+El siguiente diagrama describe las interacciones entre los actores (Usuario, PO, Revisor) y las funcionalidades principales del sistema orquestado por IA.
+
+![Diagrama de Caso de Uso](./docs/use-case-diagram.png)
+
+> [!NOTE]
+> Para editar este diagrama, abre el archivo `.drawio` adjunto en la carpeta de recursos utilizando [app.diagrams.net](https://app.diagrams.net/).
+
+---
 ## 🛠️ Herramientas y Componentes Relacionados
 
 El ecosistema se divide entre servicios de plataforma y los componentes core desarrollados para la orquestación:
