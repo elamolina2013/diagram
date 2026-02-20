@@ -1,4 +1,6 @@
 # diagram
+<details>
+<summary><b>Fase 1: Validación de Identidad y Autorización</b></summary>
 
 ```mermaid
 
@@ -47,3 +49,7 @@ sequenceDiagram
     end
 
 ```
+</details>
+
+<details>
+<summary><b>Fase 2: Diseño y Validación de Módulos</b></summary>
