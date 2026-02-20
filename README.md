@@ -152,41 +152,6 @@ sequenceDiagram
 
 </details>
 
-
-
-<summary><b>Fase 4 y 5: GitOps, Interpretación y FinOps</b></summary>
-    
-```mermaid
-sequenceDiagram
-    autonumber
-    
-    participant Agent as AI Foundry Agent
-    participant MCP as MCP Server (Tools)
-    participant GH as GitHub
-    participant TFC as Terraform Cloud
-
-    %% Fase 4: GitOps y Comportamiento Natural de TFC
-    rect rgba(0, 120, 215, 0.1)
-        Agent->>MCP: Tool: Git Operations (Commit & PR)
-        MCP->>GH: Commit a rama 'provisioning'
-        MCP->>GH: Create PR hacia rama de ambiente
-        Note over GH, TFC: Evento: PR Aperturado
-        GH-->>TFC: Webhook: Gatilla Speculative Plan
-        Note right of TFC: TFC ejecuta automáticamente:<br/>1. Speculative Plan<br/>2. Sentinel Checks
-    end
-
-    %% Fase 5: Interpretación y FinOps
-    rect rgba(255, 255, 0, 0.1)
-        Agent->>MCP: Tool: Interprete (Consultar TFC)
-        MCP->>TFC: Obtiene JSON de Plan y Sentinel
-        MCP->>MCP: Función 'Interprete': Traduce Plan a Lenguaje Natural
-        Agent->>MCP: Tool: FinOps (Calculadora/Azure)
-        MCP-->>Agent: Datos de Costos Enriquecidos
-    end
-    
-```
-</details>
-
 <details>
 <summary><b>Fase 6, 7 y 8: Gobernanza, Apply y Cierre</b></summary>
 
