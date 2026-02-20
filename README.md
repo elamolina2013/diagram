@@ -53,27 +53,43 @@ sequenceDiagram
         Bot->>Gov: Cierra Work Order (Trazabilidad)
     end
 ```
+## 📍 Responsabilidades
 
-Fase,Responsable Principal,Descripción Key
-1. Identificación,AI Agent + AAD/CVT,Validación de que el usuario tiene permisos sobre la App impactada.
-2. Diseño,AI Agent + TFC Registry,Selección de módulos privados y generación de código HCL.
-3. Análisis,Terraform Cloud,"Ejecución de Speculative Plans, validación de políticas y estimación de costos."
-4. Gobernanza,PO + Revisor Par,Validación humana del impacto técnico y financiero antes del despliegue.
-5. Ejecución,AI Agent + MCP Tool,Aplicación de cambios (apply) y cierre de tickets en Jira.
+| Fase | Responsable Principal | Descripción Key |
+| :--- | :--- | :--- |
+| **1. Identificación** | AI Agent + AAD/CVT | Validación de que el usuario tiene permisos sobre la App impactada. |
+| **2. Diseño** | AI Agent + TFC Registry | Selección de módulos privados y generación de código HCL. |
+| **3. Análisis** | Terraform Cloud | Ejecución de Speculative Plans, validación de políticas y estimación de costos. |
+| **4. Gobernanza** | PO + Revisor Par | Validación humana del impacto técnico y financiero antes del despliegue. |
+| **5. Ejecución** | AI Agent + MCP Tool | Aplicación de cambios (`apply`) y cierre de tickets en Jira. |
+
+---
+
+## 🛠️ Herramientas y Componentes Relacionados
+
+El ecosistema se divide entre servicios de plataforma y los componentes core desarrollados para la orquestación:
+
+| Herramienta / Componente | Capacidad | Propósito en el Flujo |
+| :--- | :--- | :--- |
+| **Microsoft Teams** | Interfaz de Usuario | Punto de contacto inicial; renderiza Tarjetas Adaptativas para la interacción con el usuario. |
+| **Azure Bot Service** | Enrutador de Mensajes | Actúa como el "Gateway" que recibe los eventos de Teams y los canaliza hacia el Backend. |
+| **Bot Backend** | Orquestador de Lógica | Componente central que gestiona el estado de la sesión, propaga el contexto y conecta con la IA. |
+| **AI Foundry Agent** | Motor Cognitivo | Agente de IA que interpreta la intención del usuario y decide qué herramientas (Tools) ejecutar. |
+| **MCP Server** | Host de Herramientas | Servidor basado en el *Model Context Protocol* que expone las capacidades técnicas al Agente. |
+| **MCP Tools** | Conectores Específicos | Funciones personalizadas para ejecutar acciones en CVT, JIRA, AAD, GitHub y Terraform Cloud. |
+| **Terraform Cloud** | Engine de Infraestructura | Registro de módulos privados, ejecución de planes, Sentinel (Governance) y FinOps. |
+| **GitHub** | Repositorio GitOps | Almacena el código generado y gestiona el ciclo de vida de los cambios mediante Pull Requests. |
+| **Jira / AAD / CVT** | Sistemas de Registro | Fuentes de verdad para trazabilidad (Jira), Identidad (AAD) e inventario de Apps (CVT). |
+
+---
 
 
-🔍 Detalle Técnico de Interacciones
+## 🔍 Detalle Técnico de Interacciones
 Selecciona una fase para ver el diagrama de secuencia detallado con todas las llamadas a herramientas MCP y validaciones específicas:
 
-[!TIP]
-Los diagramas detallados a continuación contienen las notas técnicas de implementación para el equipo de ingeniería.
+> [!TIP]
+> Los diagramas detallados a continuación contienen las notas técnicas de implementación para el equipo de ingeniería.
 
-<details>
-<summary><b>📂 Ver Detalles Técnicos (Fases 1 a 8)</b></summary>
-
-(Aquí puedes pegar los bloques de código detallados que generamos anteriormente)
-
-</details>
 
 <details>
 <summary><b>Fase 1: Validación de Identidad y Autorización</b></summary>
@@ -140,7 +156,7 @@ sequenceDiagram
 </details>
 
 <details>
-<summary><b>Fase 2 y 3: Entendimiento y Validación de Módulos</b></summary>
+<summary><b>Fase 2: Entendimiento y Validación de Módulos</b></summary>
     
 ```mermaid
 sequenceDiagram
@@ -195,7 +211,7 @@ sequenceDiagram
 </details>
 
 <details>
-<summary><b>Fase 4 y 5: GitOps, Interpretación y FinOps</b></summary>
+<summary><b>Fase 3: GitOps, Interpretación y FinOps</b></summary>
 
 ```mermaid
 sequenceDiagram
@@ -229,7 +245,7 @@ sequenceDiagram
 </details>
 
 <details>
-<summary><b>Fase 6, 7 y 8: Gobernanza, Apply y Cierre</b></summary>
+<summary><b>Fase 4: Gobernanza, Apply y Cierre</b></summary>
 
 ```mermaid
 sequenceDiagram
