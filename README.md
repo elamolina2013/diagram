@@ -1,4 +1,58 @@
-# diagram
+# 🤖 AI Infrastructure Provisioning Agent
+> **Orquestación inteligente de infraestructura como código (IaC) mediante GitOps y Gobernanza automatizada.**
+
+Este documento detalla el ciclo de vida de una solicitud de aprovisionamiento, desde la intención del usuario en el chat hasta el despliegue final en la nube. El sistema integra **AI Foundry Agents**, **MCP Servers (Model Context Protocol)** y **Terraform Cloud**.
+
+---
+
+## 📍 Flujo Maestro (Nivel 0)
+Este diagrama representa la "Hoja de Ruta" del proceso. Proporciona una visión ejecutiva de las 5 fases principales del servicio.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    
+    %% Configuración de colores agnósticos al tema
+    actor Dev as Usuario Solicitante
+    participant Bot as Bot / AI Agent
+    participant Gov as Gobernanza (AAD/CVT/Jira)
+    participant GitOps as Pipeline (GH/TFC)
+    participant Aprobador as PO / Revisor
+
+    rect rgba(0, 120, 215, 0.1)
+        Note over Dev, Aprobador: FASE 1: IDENTIFICACIÓN Y PERMISOS
+        Dev->>Bot: Solicita Recurso
+        Bot->>Gov: Valida Identidad, App y Permisos
+        Gov-->>Bot: Autorización Exitosa
+    end
+
+    rect rgba(255, 255, 0, 0.1)
+        Note over Dev, Aprobador: FASE 2: DISEÑO Y ORQUESTACIÓN
+        Bot->>Dev: Conversación de Requisitos
+        Bot->>GitOps: Genera Código y Abre Pull Request (PR)
+    end
+
+    rect rgba(0, 120, 215, 0.1)
+        Note over Dev, Aprobador: FASE 3: ANÁLISIS AUTOMÁTICO
+        GitOps->>GitOps: Ejecuta Plan, Sentinel y FinOps
+        GitOps-->>Bot: Reporta Resultados (Costos/Políticas)
+    end
+
+    rect rgba(100, 100, 255, 0.1)
+        Note over Dev, Aprobador: FASE 4: APROBACIONES HUMANAS
+        Bot->>Aprobador: Solicita Conformidad (Peer Review + PO)
+        Aprobador-->>Bot: Aprobaciones Completadas
+    end
+
+    rect rgba(0, 255, 0, 0.1)
+        Note over Dev, Aprobador: FASE 5: EJECUCIÓN Y CIERRE
+        Bot->>GitOps: Ejecuta Merge y Apply
+        GitOps-->>Dev: Notifica Recursos Creados
+        Bot->>Gov: Cierra Work Order (Trazabilidad)
+    end
+```
+
+
 <details>
 <summary><b>Fase 1: Validación de Identidad y Autorización</b></summary>
 
