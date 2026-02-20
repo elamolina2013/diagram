@@ -355,3 +355,14 @@ sequenceDiagram
 ```
 </details>
 
+
+---
+
+## ⚠️  Manejo de Excepciones
+El sistema está diseñado para no dejar procesos "huérfanos". Aquí se describen los comportamientos ante fallos comunes:
+
+* **Sentinel Hard Fail:** El flujo se detiene inmediatamente. El Agente bloquea el Merge y notifica al usuario el motivo técnico y la política violada.
+* **Error en Apply (Nube):** Si Terraform falla durante la ejecución, el Agente no cierra el ticket de Jira; por el contrario, lo escala automáticamente al equipo de **Cloud Governance (N2)** adjuntando los logs del error.
+* **Time-out de Aprobación:** Si el PO o Revisor no responden en un tiempo definido, el Agente envía recordatorios automáticos vía Teams para evitar cuellos de botella.
+
+---
