@@ -322,14 +322,14 @@ sequenceDiagram
             TFC-->>MCP: Apply Finished (Outputs)
             Agent->>Backend: Notifica éxito + Detalle recursos (Name, RG, Subscription)
             Agent->>Backend: Sugiere features adicionales del módulo
-            Teams-->>Dev: "Recursos creados con éxito. Puedes habilitar X feature luego."
+            Teams-->>Dev: ""Aprovisionamiento terminado con éxito" Puedes habilitar X feature luego."
+            Note right of Teams: Mostrar Detalle de los cambios aplicados.
             Agent->>MCP: Cierra Work Order en JIRA
             MCP->>Jira: WO Cerrado con trazabilidad total
-            MCP-->>Agent: Confirmación
-            Agent->>Backend: Genera mensaje de éxito
-            Backend->>Teams: Notifica éxito
-            Teams-->>Dev: "Aprovisionamiento terminado con éxito"
-            Note right of Teams: Mostrar Detalle de los cambios aplicados.
+            MCP-->>Agent: Confirmación WO Cerrado 
+            Agent->>Backend: Genera mensaje de WO Cerrado 
+            Backend->>Teams: Notifica WO Cerrado 
+            
         end
     else Error en el Apply
         rect rgba(255, 0, 0, 0.1)
